@@ -1,0 +1,1 @@
+['Project(+Person,-Proj).', 'Student(+Person).', 'courseprof(-Course,+Person).', 'courseta(-Course,+Person).', 'faculty(+Person).', 'sameperson(+Person,+Person).']

@@ -1,0 +1,48 @@
+digraph G {
+    style="filled";
+    edge [comment="Wildcard node added automatic in EG."];
+    node [comment="Wildcard node added automatic in EG."];
+    "Course" [shape="box"];
+    "Person" [shape="box"];
+    "Project" [width="0.5", 
+               style="filled", 
+               orientation="45.0", 
+               shape="polygon", 
+               fillcolor="red", 
+               height="0.75"];
+    "Student" [style="filled", 
+               fillcolor="red"];
+    "courseprof" [width="0.5", 
+                  style="filled", 
+                  orientation="45.0", 
+                  height="0.75", 
+                  shape="polygon", 
+                  fillcolor="red", 
+                  distortion="0.0"];
+    "courseta" [orientation="45.0", 
+                shape="polygon", 
+                style="filled", 
+                fillcolor="red", 
+                height="0.75"];
+    "faculty" [style="filled", 
+               orientation="45.0", 
+               fillcolor="blue", 
+               height="0.75"];
+    "Proj" [shape="box"];
+    "sameperson" [orientation="45.0", 
+                  shape="polygon", 
+                  style="filled", 
+                  fillcolor="red", 
+                  height="0.75"];
+    "Person" -> "sameperson";
+    "sameperson" -> "Person";
+    "Person" -> "Project";
+    "Project" -> "Proj";
+    "Student" -> "Person"  [color="blue", 
+                            style="solid"];
+    "faculty" -> "Person"  [color="blue"];
+    "Course" -> "courseta";
+    "courseta" -> "Person";
+    "Course" -> "courseprof";
+    "courseprof" -> "Person";
+}
