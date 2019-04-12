@@ -1,0 +1,96 @@
+digraph G {
+    rankdir=LR;
+    fontname="sans-serif";
+    penwidth="0.1";
+    edge [comment="Wildcard node added automatic in EG."];
+    node [comment="Wildcard node added automatic in EG."];
+    "sameperson" [shape="polygon", 
+                  orientation="45.0"];
+    "samecourse" [orientation="45.0", 
+                  shape="polygon", 
+                  style="filled", 
+                  fillcolor="red"];
+    "professor" [shape="ellipse", 
+                 style="filled", 
+                 fillcolor="red"];
+    "projectmember" [orientation="45.0", 
+                     shape="polygon", 
+                     style="filled", 
+                     fillcolor="red"];
+    "advisedby" [style="filled", 
+                 orientation="45.0", 
+                 color="white", 
+                 fontcolor="white", 
+                 shape="polygon", 
+                 fillcolor="blue"];
+    "taughtby" [orientation="45.0", 
+                shape="polygon", 
+                style="filled", 
+                fillcolor="red"];
+    "ta" [orientation="45.0", 
+          shape="polygon", 
+          style="filled", 
+          fillcolor="red"];
+    "yearsinprogram" [shape="ellipse", 
+                      peripheries=2, 
+                      style="filled", 
+                      fillcolor="red"];
+    "student" [shape="ellipse", 
+               style="filled", 
+               fillcolor="red"];
+    "Project" [shape="box"];
+    "tempadvisedby" [orientation="45.0", 
+                     shape="polygon", 
+                     style="filled", 
+                     fillcolor="red"];
+    "Title" [shape="box"];
+    "sameproject" [orientation="45.0", 
+                   shape="polygon", 
+                   style="filled", 
+                   fillcolor="red"];
+    "Course" [shape="box"];
+    "Person" [shape="box"];
+    "hasposition" [shape="ellipse", 
+                   peripheries=2, 
+                   style="filled", 
+                   fillcolor="red"];
+    "publication" [orientation="45.0", 
+                   shape="polygon", 
+                   style="filled", 
+                   fillcolor="red"];
+    "Quarter" [shape="box"];
+    "courselevel" [shape="ellipse", 
+                   peripheries=2, 
+                   style="filled", 
+                   fillcolor="red"];
+    "inphase" [shape="ellipse", 
+               peripheries=2, 
+               style="filled", 
+               fillcolor="red"];
+    "professor" -> "Person"  [color="blue"];
+    "courselevel" -> "Course"  [color="blue"];
+    "inphase" -> "Person"  [color="blue"];
+    "Project" -> "sameproject";
+    "sameproject" -> "Project";
+    "taughtby" -> "Quarter";
+    "publication" -> "Title";
+    "Course" -> "ta";
+    "Person" -> "advisedby";
+    "student" -> "Person"  [color="blue"];
+    "Course" -> "taughtby";
+    "advisedby" -> "Person";
+    "tempadvisedby" -> "Person";
+    "hasposition" -> "Person"  [color="blue"];
+    "samecourse" -> "Course";
+    "Course" -> "samecourse";
+    "ta" -> "Quarter";
+    "ta" -> "Person";
+    "Person" -> "tempadvisedby";
+    "Person" -> "publication";
+    "projectmember" -> "Project";
+    "Person" -> "projectmember";
+    "yearsinprogram" -> "Person"  [color="blue"];
+    "taughtby" -> "Person";
+    "sameperson" -> "Person";
+    "Person" -> "sameperson";
+}

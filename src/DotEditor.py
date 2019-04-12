@@ -20,7 +20,7 @@ import wx.propgrid as wxpg
 import ExtGraph as ExtGraph
 
 from UIClass import MainFrame, DialogAppend, DialogAbout, DialogGraphSetting, \
-                    DialogHelp
+                    DialogHelp, ERAppend
 from DotScriptEditor import DS
 import ExtParser
 import AttrsDef
@@ -90,16 +90,16 @@ class DH(DialogHelp):
         
         return
 
-class DA(DialogAppend):
+class DA(ERAppend):
     '''Append item dialog.'''
     def __init__(self, parent):
-        DialogAppend.__init__(self, parent)
+        ERAppend.__init__(self, parent)
         self.data_graph = parent.data_graph
-        self.__refresh_comboBoxA_suggestion()
+        # self.__refresh_comboBoxA_suggestion()
         
-        self.m_comboBox_nodeA.SetFocus()
+        # self.m_comboBox_nodeA.SetFocus()
     
-    def __refresh_comboBoxA_suggestion(self):
+    def __refresh_field1_suggestion(self):
         '''Refresh comboxA, filled it with suggested node name.'''
         nodes = self.data_graph.EG_get_all_node_names()
         edges = self.data_graph.EG_get_all_edge_names()
@@ -118,22 +118,19 @@ class DA(DialogAppend):
             # Get all node name in graph. Include all end-nodes in edges. 
             s_n = list( set(nodes).union(endpoints) )
       
-        # Save the value in old_v.
-        old_v = self.m_comboBox_nodeA.GetValue()
-        self.m_comboBox_nodeA.Clear()
+
+        self.field1.Clear()
         s_n.sort()
         for n in s_n:
-            self.m_comboBox_nodeA.Append(n.decode('utf8'))
-        
-        # Restore the nodeA value.
-        self.m_comboBox_nodeA.SetValue(old_v)
-        
+            self.field1.Append(n.decode('utf8'))
+
         return
     
-    def __refresh_comboBoxB_suggestion(self):
+    def __refresh_field2_suggestion(self):
         '''Refresh comboxB, filled it with suggested node name, based on the value of comboxA.'''
         if self.m_radioBox_type.GetSelection() != 1:
-            self.m_comboBox_nodeB.Clear()
+            self.field2.Clear()
+            self.field2.SetItems(self.m_nodeTypeChoices)
             return
             
         nodes = self.data_graph.EG_get_all_node_names()
@@ -142,7 +139,7 @@ class DA(DialogAppend):
         for s, d in edges:
             endpoints.add(s); endpoints.add(d)
         
-        nA = self.m_comboBox_nodeA.GetValue().strip().encode('utf8')
+        nA = self.field1.GetValue().strip().encode('utf8')
         
         # Get all node's name.
         s_n = set(nodes).union(endpoints)  
@@ -155,57 +152,58 @@ class DA(DialogAppend):
         s_n = list(s_n); s_n.sort()
         
         # Save the value in old_v.
-        old_v = self.m_comboBox_nodeB.GetValue()
-        self.m_comboBox_nodeB.Clear()
+        old_v = self.field2.GetSelection()
+        self.field2.Clear()
         for n in s_n:
-            self.m_comboBox_nodeB.Append(n.decode('utf8'))
+            self.field2.Append(n.decode('utf8'))
         
         # Restore the nodeA value.
-        self.m_comboBox_nodeB.SetValue(old_v)
+        self.field2.SetSelection(old_v)
         
         return
-    
-    def getAppendValue(self):
+
+    def getAppendValueER(self):
         '''If "append node" checked, return node in string; else return nodes in tuple.'''
         vCheck = self.m_radioBox_type.GetSelection()
-        vA = remove_double_quote( self.m_comboBox_nodeA.GetValue().encode('utf8') )
-        vB = remove_double_quote( self.m_comboBox_nodeB.GetValue().encode('utf8') )
-        
         if vCheck == 0:
-            return 'node', escape_dot_string(vA)
-        elif vCheck == 1:
-            return 'edge', (escape_dot_string(vA), escape_dot_string(vB))
+            node_name = remove_double_quote(self.field1.GetValue().encode('utf8'))
+            node_type = remove_double_quote(self.field2.GetSelection())
+            node_color = remove_double_quote(self.field3.GetSelection())
+            return 'node', escape_dot_string(node_name), node_type, node_color
         else:
-            return 'subgraph', escape_dot_string(vA)
-    
+            from_node = remove_double_quote(self.field1.GetValue().encode('utf8'))
+            to_node = remove_double_quote(self.field2.GetItems()[self.field2.GetSelection()].encode('utf8'))
+            return 'edge', (escape_dot_string(from_node), escape_dot_string(to_node))
+
     def onTypeChange(self, event):
         '''Refresh both combox when the value of append_type_checkbox changed.'''
         checked = self.m_radioBox_type.GetSelection() 
         if checked == 0: # Case Node.
-            self.m_comboBox_nodeB.Clear()
-            self.m_comboBox_nodeB.Disable()
-            self.__refresh_comboBoxA_suggestion()
-            self.__refresh_comboBoxB_suggestion()
-        elif checked == 1: # Case Edge.
-            self.m_comboBox_nodeB.Enable()
-            self.__refresh_comboBoxA_suggestion()
-            self.__refresh_comboBoxB_suggestion()
-        else: # Case Subgraph
-            self.m_comboBox_nodeB.Disable()
-            
-            self.m_comboBox_nodeA.Clear()
-            self.m_comboBox_nodeA.SetValue('clusterN')
-            self.m_comboBox_nodeA.SetFocus()
-            self.m_comboBox_nodeA.SetMark(7, -1)
+            self.m_staticText1.SetLabel(self.Node_text1)
+            self.m_staticText2.SetLabel(self.Node_text2)
+            self.m_staticText3.Show()
+            self.field3.Show()
+            self.__refresh_field1_suggestion()
+            self.__refresh_field2_suggestion()
+        else: # Case Edge.
+            self.field1.Clear()
+            self.field2.Clear()
+            self.m_staticText1.SetLabel(self.Edge_text1)
+            self.m_staticText2.SetLabel(self.Edge_text2)
+            self.m_staticText3.Hide()
+            self.field3.Hide()
+            self.__refresh_field1_suggestion()
+            self.__refresh_field2_suggestion()
+
         
-    def onNodeAChanged(self, event):
-        '''Refill comboxB when value of combox changed.'''
+    def field1Changed(self, event):
+        '''Refill field2 when value of field1 changed.'''
         checked = self.m_radioBox_type.GetSelection() 
         if checked == 1:
-            self.__refresh_comboBoxB_suggestion()
+            self.__refresh_field2_suggestion()
         
     def OnOK(self, event):
-        v = self.getAppendValue()
+        v = self.getAppendValueER()
         sth_wrong = False
         if v[0] in ['node', 'subgraph']:
             if v[1] == '':
@@ -229,14 +227,14 @@ class DGS(DialogGraphSetting):
         # Init the value of control.
         g = parent.data_graph
         self.m_checkBox_strict.SetValue(g.get_strict(None))
-        
+
         if g.get_type() == 'graph':
             self.m_radioBox_type.SetSelection(1)
         else:
             self.m_radioBox_type.SetSelection(0)
-            
+
         self.m_textCtrl_name.SetValue(g.get_name().strip().decode('utf8'))
-        
+
         self.m_choice_layout_cmd.Clear()
         self.m_choice_layout_cmd.AppendItems(G_CMDS)
         self.m_choice_layout_cmd.SetSelection(G_CMDS.index(g.prog))
@@ -256,7 +254,7 @@ class MF(MainFrame):
         MainFrame.__init__(self, parent)
 
         # Set icon of buttons. (Cause of the resource path problem in pyinstaller~~~)
-        for btn_name in ['add', 'minus', 'graphsetting', 'help']:
+        for btn_name in ['add', 'minus',  'help']: # DialogGraphSetting
             set_s = 'self.m_bpButton_%s.SetBitmap( wx.Bitmap( resource_path("resource/icon/%s.png"), wx.BITMAP_TYPE_ANY ) )'
             eval(set_s%(btn_name,btn_name))
             set_s = 'self.m_bpButton_%s.SetBitmapHover( wx.Bitmap( resource_path("resource/icon/%s-highlight.png"), wx.BITMAP_TYPE_ANY ) )'
@@ -329,7 +327,7 @@ class MF(MainFrame):
                                              (wx.ACCEL_CTRL, ord('m'), self.m_button_get_modes.GetId()),
                                              (wx.ACCEL_ALT, ord('a'), self.m_bpButton_add.GetId()), 
                                              (wx.ACCEL_ALT, ord('d'), self.m_bpButton_minus.GetId()),
-                                             (wx.ACCEL_ALT, ord('g'), self.m_bpButton_graphsetting.GetId()),
+                                             # (wx.ACCEL_ALT, ord('g'), self.m_bpButton_graphsetting.GetId()),
                                              ])
         self.SetAcceleratorTable(self.accel_tb)
 
@@ -644,10 +642,10 @@ class MF(MainFrame):
         a_id = None
         if r == wx.ID_OK:
             
-            v = dlg.getAppendValue()            
+            v = dlg.getAppendValueER()
             if v[0] == 'node': ### Add node.
                 try:
-                    a_data = self.data_graph.EG_append_node(v[1], root_graph=root_graph)
+                    a_data = self.data_graph.EG_append_ER_node(v[1], root_graph=root_graph, type=v[2], color=v[3])
                 except:
                     wx.MessageBox('Can\'t add item "%s", maybe the same-named item was existed.'%(v[1].decode('utf8')), 
                                   'Found duplicated node name')
@@ -689,10 +687,10 @@ class MF(MainFrame):
                     self.m_tree.SetItemImage(n_id, self.img_dict[(n, 'gray')])
                 self.m_tree.Expand(a_id)
             
-            ### Set label.
-            label = escape_dot_string(dlg.m_textCtrl_label.GetValue())
-            if label != '':
-                a_data.set('label', add_double_quote(label.encode('utf8')))
+            # ### Set label.
+            # label = escape_dot_string(dlg.m_textCtrl_label.GetValue())
+            # if label != '':
+            #     a_data.set('label', add_double_quote(label.encode('utf8')))
             
             ### Select the item in tree.
             if not a_id is None:
@@ -1080,6 +1078,16 @@ class MF(MainFrame):
         self.is_data_changed = False
         return
 
+    def onViewModes( self, event ):
+        dlg = DS(self)
+        dlg.SetScript(self.data_graph.EG_to_modes().decode('utf8'))
+        if dlg.ShowModal() == wx.ID_OK:
+            self.update_graph(dlg.graph)
+            self.is_data_changed = True
+        dlg.Destroy()
+
+        return
+
     def onViewSource(self, event):
         dlg = DS(self)
         dlg.SetScript(self.data_graph.EG_to_string().decode('utf8'))
@@ -1152,4 +1160,3 @@ if __name__ == "__main__":
     frame = MF(parent=None)
     frame.Show(True)
     app.MainLoop()
-    

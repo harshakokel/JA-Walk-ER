@@ -9,6 +9,7 @@ This module define the extended functions of graph data.
 
 The core class base on the PyDot project. (https://github.com/erocarrera/pydot)
 '''
+from __builtin__ import dict
 
 import pydot
 import wx, sys
@@ -43,6 +44,12 @@ class ExtGraph(pydot.Dot):
     __bitmap = None
     __historys = []
     __history_point = -1
+
+    #order [u"Attribute Node",u"Entity Node", u"Relation Node"]
+    node_shape = [walker.BuildDictionaries.ENTITY_SHAPE,walker.BuildDictionaries.RELATION_SHAPE,walker.BuildDictionaries.ATTRIBUTE_SHAPE,walker.BuildDictionaries.ATTRIBUTE_SHAPE]
+
+    # Order [ u"None", u"Important", u"Target"]
+    node_color = [None,  walker.BuildDictionaries.IMPORTANT_COLOR, walker.BuildDictionaries.TARGET_COLOR ]
     
     def __init__(self, graph_name='G', obj_dict=None, template_file=None):
         pydot.Dot.__init__(self, graph_name=graph_name, obj_dict=obj_dict)
@@ -159,9 +166,43 @@ class ExtGraph(pydot.Dot):
         for sg in sgs:
             result += self.EG_get_all_edge_names(sg)
         
-        return list(set(result))    
-    
-    def EG_append_node(self, nodename, root_graph=None):
+        return list(set(result))
+
+    def EG_append_ER_node(self, nodename, root_graph=None, type=0, color=None  ):
+        "Add node to 'root_graph' only by name."
+        uname = to_unicode(nodename.strip())
+
+
+        if root_graph is None:
+            root_graph = self
+
+        # Check unique.
+        n = self.EG_get_node_by_name(uname, root_graph=root_graph)
+        if not (n is None):
+            raise Exception('Unique error. The node with name "%s" was existed in the graph.' % uname)
+
+        uname = add_double_quote(uname)
+
+        attributes ={}
+        if not (color is None or color <= 0):
+            attributes["style"] = '\"filled\"'
+            attributes["fillcolor"] = self.node_color[color]
+            if color == 2:
+                attributes["fontcolor"]= walker.BuildDictionaries.WHITE
+        if type == 1:
+            attributes["orientation"] = u"45.0"
+        elif type == 3:
+            attributes["peripheries"] = u"2"
+        attributes["shape"] = self.node_shape[type]
+        n = pydot.Node(name =uname, **attributes)
+        root_graph.add_node(n)
+
+        self.__check_wildcard_existed()
+
+        self.refresh_bitmap()
+        return n
+
+    def EG_append_node(self, nodename, attr=None, root_graph=None):
         "Add node to 'root_graph' only by name."
         uname = to_unicode(nodename.strip())
         
@@ -175,7 +216,7 @@ class ExtGraph(pydot.Dot):
         
         uname = add_double_quote(uname)
         
-        n = pydot.Node(uname)
+        n = pydot.Node(uname,attr)
         root_graph.add_node(n)
         
         self.__check_wildcard_existed()
@@ -200,8 +241,13 @@ class ExtGraph(pydot.Dot):
         
         nameA = add_double_quote(nameA)
         nameB = add_double_quote(nameB)
-        
-        e = pydot.Edge(src=nameA, dst=nameB)
+
+        if root_graph.get_node(nameA)[0].get_shape() == walker.BuildDictionaries.ENTITY_SHAPE and root_graph.get_node(nameB)[0].get_shape() == walker.BuildDictionaries.ATTRIBUTE_SHAPE:
+            e = pydot.Edge(src=nameB, dst=nameA, color=walker.BuildDictionaries.ATTRIBUTE_EDGE)
+        elif root_graph.get_node(nameB)[0].get_shape() == walker.BuildDictionaries.ENTITY_SHAPE and root_graph.get_node(nameA)[0].get_shape() == walker.BuildDictionaries.ATTRIBUTE_SHAPE:
+            e = pydot.Edge(src=nameA, dst=nameB, color=walker.BuildDictionaries.ATTRIBUTE_EDGE)
+        else:
+            e = pydot.Edge(src=nameA, dst=nameB)
         
         root_graph.add_edge(e)
         
@@ -342,6 +388,8 @@ class ExtGraph(pydot.Dot):
         """
         #TODO Add modes
         dictionary = walker.BuildDictionaries(self)
+        if  dictionary.target is  None:
+            return "No target node found"
         target = dictionary.target
         all_features = list(set(dictionary.relations).union(set(dictionary.attributes)) - set([target]))
         features = dictionary.importants
@@ -350,9 +398,9 @@ class ExtGraph(pydot.Dot):
 
         networks.walkFeatures(all_paths, shortest=True)
 
-        bk = networks.all_modes_boostsrl
+        bk = networks.all_modes
 
-        return bk.__str__()
+        return '\n'.join(bk)
     
     def EG_to_string(self, indent=0, root_graph=None):
         """Returns a string representation of the graph in dot language.

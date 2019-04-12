@@ -1,0 +1,5 @@
+mode: actor(+personid).
+mode: female_gender(+personid).
+mode: genre(+personid,-genreid).
+mode: movie(-movieid,+personid).
+mode: workedunder(+personid,+personid).

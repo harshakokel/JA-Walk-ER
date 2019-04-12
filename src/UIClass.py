@@ -32,7 +32,7 @@ class MainFrame ( wx.Frame ):
 		fgSizer14.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
 		self.m_panel16 = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.NO_BORDER|wx.TAB_TRAVERSAL )
-		fgSizer15 = wx.FlexGridSizer( 1, 11, 0, 0 )
+		fgSizer15 = wx.FlexGridSizer( 1, 14, 0, 0 )
 		fgSizer15.AddGrowableCol( 8 )
 		fgSizer15.SetFlexibleDirection( wx.BOTH )
 		fgSizer15.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
@@ -46,57 +46,43 @@ class MainFrame ( wx.Frame ):
 		fgSizer15.AddSpacer( ( 8, 30), 1, wx.EXPAND, 5 )
 		
 		self.m_bpButton_new = wx.Button( self.m_panel16, wx.ID_ANY, u"New",   wx.DefaultPosition, wx.DefaultSize, 0)
-		
-		self.m_bpButton_new.SetBitmapFocus( wx.NullBitmap )
-		self.m_bpButton_new.SetBitmapHover( wx.NullBitmap )
-		self.m_bpButton_new.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNFACE ) )
 		self.m_bpButton_new.SetToolTipString( u"Create a new Graph" )
 		
 		fgSizer15.Add( self.m_bpButton_new, 0, wx.ALIGN_CENTER|wx.ALL|wx.EXPAND, 5 )
 		
 		self.m_bpButton_open = wx.Button( self.m_panel16, wx.ID_ANY, u"Open",  wx.DefaultPosition, wx.DefaultSize, 0)
-		self.m_bpButton_open.SetBitmapFocus( wx.NullBitmap )
-		self.m_bpButton_open.SetBitmapHover( wx.NullBitmap )
-		self.m_bpButton_open.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNFACE ) )
 		self.m_bpButton_open.SetToolTipString( u"Open a existed Graph file" )
 		
 		fgSizer15.Add( self.m_bpButton_open, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 		
 		self.m_bpButton_save = wx.Button( self.m_panel16, wx.ID_ANY,  u"Save",   wx.DefaultPosition, wx.DefaultSize, 0)
-		
-		self.m_bpButton_save.SetBitmapFocus( wx.NullBitmap )
-		self.m_bpButton_save.SetBitmapHover( wx.NullBitmap )
-		self.m_bpButton_save.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNFACE ) )
 		self.m_bpButton_save.SetToolTipString( u"Save graph to file" )
 		
 		fgSizer15.Add( self.m_bpButton_save, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 		
 		self.m_bpButton_script = wx.Button( self.m_panel16, wx.ID_ANY, u"Dot",   wx.DefaultPosition, wx.DefaultSize, 0)
-		
-		self.m_bpButton_script.SetBitmapFocus( wx.NullBitmap )
-		self.m_bpButton_script.SetBitmapHover( wx.NullBitmap )
-		self.m_bpButton_script.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNFACE ) )
 		self.m_bpButton_script.SetToolTipString( u"View dot script" )
 		
 		fgSizer15.Add( self.m_bpButton_script, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+
+		self.m_bpButton_modes = wx.Button(self.m_panel16, wx.ID_ANY, u"Modes", wx.DefaultPosition, wx.DefaultSize, 0)
+		self.m_bpButton_modes.SetToolTipString(u"View Modes")
+
+		fgSizer15.Add(self.m_bpButton_modes, 0, wx.ALIGN_CENTER | wx.ALL, 5)
 		
 		self.m_bpButton_export = wx.Button( self.m_panel16, wx.ID_ANY,  u"Export Image",  wx.DefaultPosition, wx.DefaultSize, 0)
-		
-		self.m_bpButton_export.SetBitmapFocus( wx.NullBitmap )
-		self.m_bpButton_export.SetBitmapHover( wx.NullBitmap )
-		self.m_bpButton_export.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNFACE ) )
 		self.m_bpButton_export.SetToolTipString( u"Save graph to image file" )
 		
 		fgSizer15.Add( self.m_bpButton_export, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 		
-		self.m_button_save_as = wx.Button( self.m_panel16, wx.ID_ANY, u"Save As", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button_save_as = wx.Button( self.m_panel16, wx.ID_ANY, u"Export Dot", wx.DefaultPosition, wx.DefaultSize, 0 )
 		# self.m_button_save_as.Hide()
 
-		fgSizer15.Add( self.m_button_save_as, 0, wx.ALL, 5 )
+		fgSizer15.Add( self.m_button_save_as, 0, wx.ALIGN_CENTER|wx.ALL, 6 )
 
 		self.m_button_get_modes = wx.Button(self.m_panel16, wx.ID_ANY, u"Export modes", wx.DefaultPosition, wx.DefaultSize, 0)
 
-		fgSizer15.Add(self.m_button_get_modes, 0, wx.ALL, 6)
+		fgSizer15.Add(self.m_button_get_modes, 0,  wx.ALIGN_CENTER|wx.ALL, 5)
 		
 		
 		fgSizer15.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
@@ -149,13 +135,13 @@ class MainFrame ( wx.Frame ):
 		
 		fgSizer7.Add( self.m_staticText4, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 2 )
 		
-		self.m_bpButton_graphsetting = wx.BitmapButton( self.m_panel7, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW|wx.NO_BORDER )
-		
-		self.m_bpButton_graphsetting.SetBitmapFocus( wx.NullBitmap )
-		self.m_bpButton_graphsetting.SetBitmapHover( wx.NullBitmap )
-		self.m_bpButton_graphsetting.SetBackgroundColour( wx.Colour( 255, 255, 255 ) )
-		
-		fgSizer7.Add( self.m_bpButton_graphsetting, 0, wx.ALL, 5 )
+		# self.m_bpButton_graphsetting = wx.BitmapButton( self.m_panel7, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW|wx.NO_BORDER )
+		#
+		# self.m_bpButton_graphsetting.SetBitmapFocus( wx.NullBitmap )
+		# self.m_bpButton_graphsetting.SetBitmapHover( wx.NullBitmap )
+		# self.m_bpButton_graphsetting.SetBackgroundColour( wx.Colour( 255, 255, 255 ) )
+		#
+		# fgSizer7.Add( self.m_bpButton_graphsetting, 0, wx.ALL, 5 )
 		
 		
 		fgSizer7.AddSpacer( ( 12, 0), 1, wx.EXPAND, 5 )
@@ -224,9 +210,9 @@ class MainFrame ( wx.Frame ):
 		fgSizer5.Add( self.m_panel8, 1, wx.EXPAND |wx.ALL, 1 )
 		
 		self.m_pgManager1 = pg.PropertyGridManager(self.m_panel5, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.propgrid.PGMAN_DEFAULT_STYLE|wx.propgrid.PG_BOLD_MODIFIED|wx.propgrid.PG_SPLITTER_AUTO_CENTER|wx.propgrid.PG_TOOLBAR|wx.propgrid.PG_TOOLTIPS|wx.TAB_TRAVERSAL|wx.NO_BORDER)
-		self.m_pgManager1.SetExtraStyle( wx.propgrid.PG_EX_MODE_BUTTONS ) 
+		self.m_pgManager1.SetExtraStyle( wx.propgrid.PG_EX_MODE_BUTTONS )
 		self.m_pgManager1.SetBackgroundColour( wx.Colour( 255, 255, 255 ) )
-		
+
 		fgSizer5.Add( self.m_pgManager1, 2, wx.ALIGN_CENTER|wx.ALL|wx.EXPAND, 2 )
 		
 		
@@ -335,11 +321,12 @@ class MainFrame ( wx.Frame ):
 		self.m_bpButton_open.Bind( wx.EVT_BUTTON, self.onOpenGraph )
 		self.m_bpButton_save.Bind( wx.EVT_BUTTON, self.onSaveGraph )
 		self.m_bpButton_script.Bind( wx.EVT_BUTTON, self.onViewSource )
+		self.m_bpButton_modes.Bind(wx.EVT_BUTTON, self.onViewModes)
 		self.m_bpButton_export.Bind( wx.EVT_BUTTON, self.onExportImage )
 		self.m_button_save_as.Bind( wx.EVT_BUTTON, self.onSaveAs )
 		self.m_button_get_modes.Bind(wx.EVT_BUTTON, self.onExportModes)
 		self.m_bpButton_help.Bind( wx.EVT_BUTTON, self.onHelp )
-		self.m_bpButton_graphsetting.Bind( wx.EVT_BUTTON, self.onGraphSetting )
+		# self.m_bpButton_graphsetting.Bind( wx.EVT_BUTTON, self.onGraphSetting )
 		self.m_bpButton_add.Bind( wx.EVT_BUTTON, self.onAppendItem )
 		self.m_bpButton_minus.Bind( wx.EVT_BUTTON, self.onDeleteItem )
 		self.m_tree.Bind( wx.EVT_TREE_SEL_CHANGED, self.onItemSelected )
@@ -362,6 +349,9 @@ class MainFrame ( wx.Frame ):
 		event.Skip()
 	
 	def onViewSource( self, event ):
+		event.Skip()
+
+	def onViewModes( self, event ):
 		event.Skip()
 
 	def onExportModes( self, event ):
@@ -412,6 +402,13 @@ class MainFrame ( wx.Frame ):
 
 class ERAppend(wx.Dialog):
 
+	Node_text1 =  u"Node Name:"
+	Node_text2 =  u"Node Type:"
+	Node_text3 = u"Node Information:"
+	Edge_text1 = u"From Node:"
+	Edge_text2 = u"To Node:"
+	Edge_text3 = u"Edge Type:"
+
 	def __init__(self, parent):
 		wx.Dialog.__init__(self, parent, id=wx.ID_ANY, title=u"Append Item", pos=wx.DefaultPosition,
 						   size=wx.Size(416, 366), style=wx.DEFAULT_DIALOG_STYLE)
@@ -445,58 +442,62 @@ class ERAppend(wx.Dialog):
 		fgSizer17.SetFlexibleDirection(wx.BOTH)
 		fgSizer17.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
-		m_radioBox_typeChoices = [u"Node", u"Edge", u"Subgraph"]
+
+		m_radioBox_typeChoices = [u"Node", u"Edge"]
 		self.m_radioBox_type = wx.RadioBox(self.m_panel27, wx.ID_ANY, u"Item Type", wx.DefaultPosition, wx.DefaultSize,
-										   m_radioBox_typeChoices, 3, wx.RA_SPECIFY_COLS)
+										   m_radioBox_typeChoices, 2, wx.RA_SPECIFY_COLS)
 		self.m_radioBox_type.SetSelection(0)
 		fgSizer17.Add(self.m_radioBox_type, 0, wx.ALL | wx.EXPAND, 5)
 
 		self.m_panel_node = wx.Panel(self.m_panel27, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
 		self.m_panel_node.SetBackgroundColour(wx.Colour(255, 255, 255))
 
-		fgSizer2 = wx.FlexGridSizer(3, 2, 0, 0)
+		fgSizer2 = wx.FlexGridSizer(5, 2, 0, 0)
 		fgSizer2.AddGrowableCol(1)
-		fgSizer2.AddGrowableRow(2)
+
 		fgSizer2.SetFlexibleDirection(wx.BOTH)
 		fgSizer2.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
-		self.m_staticText1 = wx.StaticText(self.m_panel_node, wx.ID_ANY, u"Node/NodeA:", wx.DefaultPosition,
+		self.m_staticText1 = wx.StaticText(self.m_panel_node, wx.ID_ANY,self.Node_text1, wx.DefaultPosition,
 										   wx.DefaultSize, 0)
 		self.m_staticText1.Wrap(-1)
 		fgSizer2.Add(self.m_staticText1, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 5)
 
-		m_comboBox_nodeAChoices = []
-		self.m_comboBox_nodeA = wx.ComboBox(self.m_panel_node, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition,
-											wx.DefaultSize, m_comboBox_nodeAChoices, 0)
-		fgSizer2.Add(self.m_comboBox_nodeA, 0, wx.ALIGN_CENTER | wx.ALL | wx.EXPAND, 5)
+		m_comboBox_nodeChoices = []
+		# self.m_node_name = wx.TextCtrl( self.m_panel_node, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_WORDWRAP )
+		self.field1 = wx.ComboBox(self.m_panel_node, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition,
+											wx.DefaultSize, m_comboBox_nodeChoices, 0)
+		fgSizer2.Add(self.field1, 0,  wx.ALL | wx.EXPAND, 5)
 
-		self.m_staticText2 = wx.StaticText(self.m_panel_node, wx.ID_ANY, u"Node B:", wx.DefaultPosition, wx.DefaultSize,
+
+
+		self.m_staticText2 = wx.StaticText(self.m_panel_node, wx.ID_ANY, self.Node_text2 , wx.DefaultPosition, wx.DefaultSize,
 										   0)
 		self.m_staticText2.Wrap(-1)
 		fgSizer2.Add(self.m_staticText2, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 5)
 
-		m_comboBox_nodeBChoices = []
-		self.m_comboBox_nodeB = wx.ComboBox(self.m_panel_node, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition,
-											wx.DefaultSize, m_comboBox_nodeBChoices, 0)
-		self.m_comboBox_nodeB.Enable(False)
+		self.m_nodeTypeChoices = [u"Entity Node", u"Relationship Node",u"Attribute Node",u"Multivalued attribute Node"]
+		self.field2 = wx.Choice(self.m_panel_node, wx.ID_ANY, wx.DefaultPosition,
+											wx.DefaultSize, self.m_nodeTypeChoices , 0)
 
-		fgSizer2.Add(self.m_comboBox_nodeB, 0, wx.ALIGN_CENTER | wx.ALL | wx.EXPAND, 5)
+		fgSizer2.Add(self.field2, 0, wx.ALIGN_CENTER | wx.ALL | wx.EXPAND, 5)
 
-		self.m_staticText16 = wx.StaticText(self.m_panel_node, wx.ID_ANY, u"Label:", wx.DefaultPosition, wx.DefaultSize,
-											wx.ALIGN_RIGHT)
-		self.m_staticText16.Wrap(-1)
-		fgSizer2.Add(self.m_staticText16, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT | wx.ALL, 5)
 
-		self.m_textCtrl_label = wx.TextCtrl(self.m_panel_node, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition,
-											wx.DefaultSize, wx.HSCROLL | wx.TE_MULTILINE | wx.TE_WORDWRAP)
-		self.m_textCtrl_label.SetBackgroundColour(wx.Colour(255, 255, 192))
-		self.m_textCtrl_label.SetToolTipString(u"Label of node/edge/subgraph.\nJust leave empty if no label to set.")
+		self.m_staticText3 = wx.StaticText(self.m_panel_node, wx.ID_ANY,self.Node_text3 , wx.DefaultPosition,
+											wx.DefaultSize,
+											0)
+		self.m_staticText3.Wrap(-1)
+		fgSizer2.Add(self.m_staticText3, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT | wx.ALL, 5)
 
-		fgSizer2.Add(self.m_textCtrl_label, 0, wx.ALL | wx.EXPAND, 5)
+		self.m_node_colorChoices = [u"None", u"Important", u"Target"]
+		self.field3 = wx.Choice(self.m_panel_node, wx.ID_ANY, wx.DefaultPosition,
+									  wx.DefaultSize, self.m_node_colorChoices , 0)
+
+		fgSizer2.Add(self.field3, 0, wx.ALIGN_CENTER | wx.ALL | wx.EXPAND, 5)
 
 		self.m_panel_node.SetSizer(fgSizer2)
 		self.m_panel_node.Layout()
-		fgSizer2.Fit(self.m_panel_node)
+		# fgSizer2.Fit(self.m_panel_node)
 		fgSizer17.Add(self.m_panel_node, 1, wx.EXPAND | wx.ALL, 5)
 
 		fgSizer16.Add(fgSizer17, 1, wx.EXPAND, 5)
@@ -532,8 +533,8 @@ class ERAppend(wx.Dialog):
 		# Connect Events
 		self.Bind(wx.EVT_CLOSE, self.onClose)
 		self.m_radioBox_type.Bind(wx.EVT_RADIOBOX, self.onTypeChange)
-		self.m_comboBox_nodeA.Bind(wx.EVT_COMBOBOX, self.onNodeAChanged)
-		self.m_comboBox_nodeA.Bind(wx.EVT_TEXT_ENTER, self.onNodeAChanged)
+		self.field1.Bind(wx.EVT_COMBOBOX, self.field1Changed)
+		self.field1.Bind(wx.EVT_TEXT_ENTER, self.field1Changed)
 		self.m_button3.Bind(wx.EVT_BUTTON, self.OnOK)
 		self.m_button4.Bind(wx.EVT_BUTTON, self.onCancel)
 

@@ -1,0 +1,55 @@
+digraph G {
+rankdir=LR;
+fontname="sans-serif";
+penwidth="0.1";
+edge [comment="Wildcard node added automatic in EG."];
+node [comment="Wildcard node added automatic in EG."];
+"venueid" [shape="box"];
+"haswordvenue" [shape="polygon", 
+                style="filled", 
+                fillcolor="red", 
+                orientation="45.0"];
+"authid" [shape="box"];
+"venue" [shape="polygon", 
+         style="filled", 
+         fillcolor="red", 
+         orientation="45.0"];
+"paperid" [shape="box"];
+"author" [shape="polygon", 
+          style="filled", 
+          fillcolor="red", 
+          orientation="45.0"];
+"haswordtitle" [shape="polygon", 
+                style="filled", 
+                fillcolor="red", 
+                orientation="45.0"];
+"title" [shape="polygon", 
+         style="filled", 
+         fillcolor="red", 
+         orientation="45.0"];
+"haswordauthor" [shape="polygon", 
+                 style="filled", 
+                 fillcolor="red", 
+                 orientation="45.0"];
+"wordid" [shape="box"];
+"titleid" [shape="box"];
+"sameauthor" -> "authid";
+"titleid" -> "title";
+"haswordvenue" -> "venueid";
+"author" -> "paperid";
+"venueid" -> "venue";
+"wordid" -> "haswordvenue";
+"wordid" -> "haswordauthor";
+"authid" -> "sameauthor";
+"haswordauthor" -> "authid";
+"venue" -> "paperid";
+"haswordtitle" -> "titleid";
+"wordid" -> "haswordtitle";
+"authid" -> "author";
+"title" -> "paperid";
+"sameauthor" [fontcolor="white", 
+              shape="polygon", 
+              style="filled", 
+              fillcolor="blue", 
+              orientation="45.0"];
+}

@@ -1,0 +1,15 @@
+mode: center(-posid,+bibid).
+mode: firstin(-posid,+bibid).
+mode: firstnonauthortitletkn(-posid,+bibid).
+mode: followby(-posid,-tokenid).
+mode: hascomma(-posid,+bibid).
+mode: haspunc(-posid,+bibid).
+mode: infield_ftitle(+bibpos).
+mode: isalphachar(+tokenid).
+mode: isbibpos(-bibid,+bibpos).
+mode: isdate(+tokenid).
+mode: isdigit(+tokenid).
+mode: lastinitial(-posid,+bibid).
+mode: lessthan(-posid,-posid).
+mode: next(+posid,+posid).
+mode: token(-tokenid,-posid,+bibid).

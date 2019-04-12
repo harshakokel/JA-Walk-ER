@@ -15,34 +15,34 @@ digraph G {
     "courseprof" [width="0.5", 
                   style="filled", 
                   orientation="45.0", 
-                  height="0.75", 
+                  distortion="0.0", 
                   shape="polygon", 
-                  fillcolor="red", 
-                  distortion="0.0"];
-    "courseta" [orientation="45.0", 
-                shape="polygon", 
-                style="filled", 
-                fillcolor="red", 
-                height="0.75"];
-    "faculty" [style="filled", 
-               orientation="45.0", 
-               fillcolor="blue", 
-               height="0.75"];
-    "Proj" [shape="box"];
-    "sameperson" [orientation="45.0", 
-                  shape="polygon", 
-                  style="filled", 
                   fillcolor="red", 
                   height="0.75"];
+    "courseta" [height="0.75", 
+                shape="polygon", 
+                style="filled", 
+                orientation="45.0", 
+                fillcolor="red"];
+    "Proj" [shape="box"];
+    "sameperson" [height="0.75", 
+                  shape="polygon", 
+                  style="filled", 
+                  orientation="45.0", 
+                  fillcolor="red"];
     "Person" -> "sameperson";
     "sameperson" -> "Person";
     "Person" -> "Project";
     "Project" -> "Proj";
     "Student" -> "Person"  [color="blue", 
                             style="solid"];
-    "faculty" -> "Person"  [color="blue"];
     "Course" -> "courseta";
     "courseta" -> "Person";
     "Course" -> "courseprof";
     "courseprof" -> "Person";
+    "Faculty" [fontcolor="white", 
+               shape="ellipse", 
+               style="filled", 
+               fillcolor="blue"];
+    "Faculty" -> "Person"  [color="blue"];
 }

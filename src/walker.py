@@ -11,6 +11,7 @@ class BuildDictionaries:
     EG_NODE_IGNORE  = 'node'
     EG_EDGE_IGNORE = 'edge'
     ATTRIBUTE_EDGE = '\"blue\"'
+    WHITE = '\"white\"'
 
     def __init__(self, diagram, verbose=False):
         self.verbose = verbose
@@ -21,6 +22,7 @@ class BuildDictionaries:
         self.relations = []
         self.attributes = []
         self.Graph = {}
+        self.target=None
         self.relations_dict = {}
         self.attribute_dict = {}
         self.multi_value_attributes = {}
@@ -35,6 +37,9 @@ class BuildDictionaries:
                 self.relations.append(remove_double_quote(n.get_name()))
             else:
                 self.attributes.append(remove_double_quote(n.get_name()))
+                if n.get_peripheries():
+                    self.multi_value_attributes[remove_double_quote(n.get_name())] = list()
+
             if n.get_fillcolor() == self.IMPORTANT_COLOR:
                 self.importants.append(remove_double_quote(n.get_name()))
             elif n.get_fillcolor() == self.TARGET_COLOR:
@@ -44,6 +49,8 @@ class BuildDictionaries:
             dest = remove_double_quote(edge.get_destination())
             if edge.get_color() == self.ATTRIBUTE_EDGE:
                 self.attribute_dict[src] = remove_double_quote(dest)
+                if src in self.multi_value_attributes.keys():
+                    self.multi_value_attributes[src] = [dest,src]
             if src in self.Graph:
                 self.Graph[src].append(dest)
             else:
@@ -57,7 +64,8 @@ class BuildDictionaries:
                 self.relations_dict[dest] = [src]
         for edge in diagram.get_edges():
             if diagram.get_node(edge.get_source())[0].get_shape() == self.RELATION_SHAPE:
-                self.relations_dict[remove_double_quote(edge.get_source())].append(remove_double_quote(edge.get_destination()))
+                if self.relations_dict[remove_double_quote(edge.get_source())][0] != remove_double_quote(edge.get_destination()):
+                    self.relations_dict[remove_double_quote(edge.get_source())].append(remove_double_quote(edge.get_destination()))
 
         if self.verbose:
             print('Entities:', self.entities)

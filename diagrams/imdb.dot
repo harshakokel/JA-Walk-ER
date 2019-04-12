@@ -1,0 +1,39 @@
+digraph G {
+    rankdir=LR;
+    fontname="sans-serif";
+    penwidth="0.1";
+    edge [comment="Wildcard node added automatic in EG."];
+    node [comment="Wildcard node added automatic in EG."];
+    "movieid" [shape="box", 
+               style="filled", 
+               fillcolor="red"];
+    "female_gender" [shape="ellipse", 
+                     style="filled", 
+                     fillcolor="red"];
+    "movie" [shape="polygon", 
+             style="filled", 
+             fillcolor="red", 
+             orientation="45.0"];
+    "genreid" [shape="box"];
+    "personid" [shape="box"];
+    "actor" [shape="ellipse", 
+             style="filled", 
+             fillcolor="red"];
+    "workedunder" [fontcolor="white", 
+                   shape="polygon", 
+                   style="filled", 
+                   fillcolor="blue", 
+                   orientation="45.0"];
+    "workedunder" -> "personid";
+    "genre" [shape="polygon", 
+             style="filled", 
+             fillcolor="red", 
+             orientation="45.0"];
+    "personid" -> "genre";
+    "genre" -> "genreid";
+    "personid" -> "workedunder";
+    "female_gender" -> "personid"  [color="blue"];
+    "actor" -> "personid"  [color="blue"];
+    "movieid" -> "movie";
+    "movie" -> "personid";
+}

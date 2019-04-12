@@ -1,1 +1,7 @@
-['Project(+Person,-Proj).', 'Student(+Person).', 'courseprof(-Course,+Person).', 'courseta(-Course,+Person).', 'faculty(+Person).', 'sameperson(+Person,+Person).']
+mode: Faculty(+Person).
+mode: Project(+Person,-Proj).
+mode: Student(+Person).
+mode: courseprof(-Course,+Person).
+mode: courseta(-Course,+Person).
+mode: sameperson(+Person,-Person).
+mode: sameperson(-Person,+Person).
