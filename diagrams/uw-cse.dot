@@ -72,7 +72,6 @@ digraph G {
     "inphase" -> "Person"  [color="blue"];
     "Project" -> "sameproject";
     "sameproject" -> "Project";
-    "taughtby" -> "Quarter";
     "publication" -> "Title";
     "Course" -> "ta";
     "Person" -> "advisedby";
@@ -92,5 +91,6 @@ digraph G {
     "yearsinprogram" -> "Person"  [color="blue"];
     "taughtby" -> "Person";
     "sameperson" -> "Person";
+    "taughtby" -> "Quarter";
     "Person" -> "sameperson";
 }

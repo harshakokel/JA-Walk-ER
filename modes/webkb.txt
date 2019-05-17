@@ -1,7 +1,7 @@
-mode: Faculty(+Person).
-mode: Project(+Person,-Proj).
-mode: Student(+Person).
 mode: courseprof(-Course,+Person).
 mode: courseta(-Course,+Person).
+mode: faculty(+Person).
+mode: project(-Proj,+Person).
 mode: sameperson(+Person,-Person).
 mode: sameperson(-Person,+Person).
+mode: student(+Person).

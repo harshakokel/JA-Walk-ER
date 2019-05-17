@@ -4,45 +4,45 @@ digraph G {
     node [comment="Wildcard node added automatic in EG."];
     "Course" [shape="box"];
     "Person" [shape="box"];
-    "Project" [width="0.5", 
+    "project" [width="0.5", 
                style="filled", 
                orientation="45.0", 
                shape="polygon", 
                fillcolor="red", 
                height="0.75"];
-    "Student" [style="filled", 
+    "student" [style="filled", 
                fillcolor="red"];
     "courseprof" [width="0.5", 
                   style="filled", 
                   orientation="45.0", 
-                  distortion="0.0", 
+                  height="0.75", 
                   shape="polygon", 
                   fillcolor="red", 
-                  height="0.75"];
-    "courseta" [height="0.75", 
+                  distortion="0.0"];
+    "courseta" [orientation="45.0", 
                 shape="polygon", 
                 style="filled", 
-                orientation="45.0", 
-                fillcolor="red"];
+                fillcolor="red", 
+                height="0.75"];
     "Proj" [shape="box"];
-    "sameperson" [height="0.75", 
+    "sameperson" [orientation="45.0", 
                   shape="polygon", 
                   style="filled", 
-                  orientation="45.0", 
-                  fillcolor="red"];
+                  fillcolor="red", 
+                  height="0.75"];
     "Person" -> "sameperson";
     "sameperson" -> "Person";
-    "Person" -> "Project";
-    "Project" -> "Proj";
-    "Student" -> "Person"  [color="blue", 
+    "project" -> "Person";
+    "Proj" -> "project";
+    "student" -> "Person"  [color="blue", 
                             style="solid"];
     "Course" -> "courseta";
     "courseta" -> "Person";
     "Course" -> "courseprof";
     "courseprof" -> "Person";
-    "Faculty" [fontcolor="white", 
+    "faculty" [fontcolor="white", 
                shape="ellipse", 
                style="filled", 
                fillcolor="blue"];
-    "Faculty" -> "Person"  [color="blue"];
+    "faculty" -> "Person"  [color="blue"];
 }

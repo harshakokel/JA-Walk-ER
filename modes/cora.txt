@@ -1,7 +1,7 @@
-mode: author(+authid,-paperid).
-mode: haswordauthor(-wordid,+authid).
-mode: haswordtitle(+wordid,-titleid).
-mode: haswordvenue(+wordid,-venueid).
+mode: author(-paperid,+authid).
+mode: haswordauthor(+authid,-wordid).
+mode: haswordtitle(-titleid,+wordid).
+mode: haswordvenue(-venueid,+wordid).
 mode: sameauthor(+authid,+authid).
-mode: title(-titleid,+paperid).
-mode: venue(-venuei d,+paperid).
+mode: title(+paperid,-titleid).
+mode: venue(+paperid,-venueid).

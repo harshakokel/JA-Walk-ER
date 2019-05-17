@@ -1,95 +1,95 @@
 digraph G {
-rankdir=LR;
-fontname="sans-serif";
-penwidth="0.1";
-edge [comment="Wildcard node added automatic in EG."];
-node [comment="Wildcard node added automatic in EG."];
-"isalphachar" [shape="ellipse", 
-               style="filled", 
-               fillcolor="red"];
-"isbibpos" [shape="polygon", 
-            style="filled", 
-            fillcolor="red", 
-            orientation="45.0"];
-"hascomma" [shape="polygon", 
-            style="filled", 
-            fillcolor="red", 
-            orientation="45.0"];
-"followby" [shape="polygon", 
-            style="filled", 
-            fillcolor="red", 
-            orientation="45.0"];
-"haspunc" [shape="polygon", 
-           style="filled", 
-           fillcolor="red", 
-           orientation="45.0"];
-"firstin" [shape="polygon", 
-           style="filled", 
-           fillcolor="red", 
-           orientation="45.0"];
-"token" [shape="polygon", 
-         style="filled", 
-         fillcolor="red", 
-         orientation="45.0"];
-"isdigit" [shape="ellipse", 
-           style="filled", 
-           fillcolor="red"];
-"lessthan" [shape="polygon", 
-            style="filled", 
-            fillcolor="red", 
-            orientation="45.0"];
-"next" [shape="polygon", 
-        orientation="45.0"];
-"bibpos" [shape="box"];
-"tokenid" [shape="box"];
-"isdate" [shape="ellipse", 
-          style="filled", 
-          fillcolor="red"];
-"firstnonauthortitletkn" [shape="polygon", 
-                          style="filled", 
-                          orientation="45.0", 
-                          fillcolor="red"];
-"lastinitial" [shape="polygon", 
+    rankdir=LR;
+    fontname="sans-serif";
+    penwidth="0.1";
+    edge [comment="Wildcard node added automatic in EG."];
+    node [comment="Wildcard node added automatic in EG."];
+    "isalphachar" [shape="ellipse", 
+                   style="filled", 
+                   fillcolor="red"];
+    "isbibpos" [shape="polygon", 
+                style="filled", 
+                fillcolor="red", 
+                orientation="45.0"];
+    "hascomma" [shape="polygon", 
+                style="filled", 
+                fillcolor="red", 
+                orientation="45.0"];
+    "followby" [shape="polygon", 
+                style="filled", 
+                fillcolor="red", 
+                orientation="45.0"];
+    "haspunc" [shape="polygon", 
                style="filled", 
                fillcolor="red", 
                orientation="45.0"];
-"posid" [shape="box"];
-"center" [shape="polygon", 
-          style="filled", 
-          fillcolor="red", 
-          orientation="45.0"];
-"bibid" [shape="box"];
-"infield_ftitle" [fontcolor="white", 
-                  shape="ellipse", 
-                  style="filled", 
-                  fillcolor="blue"];
-"lastinitial" -> "bibid";
-"haspunc" -> "bibid";
-"firstnonauthortitletkn" -> "bibid";
-"followby" -> "tokenid";
-"bibid" -> "followby";
-"posid" -> "haspunc";
-"posid" -> "firstin";
-"lessthan" -> "posid";
-"isdigit" -> "tokenid"  [color="blue"];
-"firstin" -> "bibid";
-"infield_ftitle" -> "bibpos"  [color="blue"];
-"tokenid" -> "token";
-"center" -> "bibid";
-"token" -> "posid";
-"posid" -> "hascomma";
-"token" -> "bibid";
-"posid" -> "next";
-"isalphachar" -> "tokenid"  [color="blue"];
-"posid" -> "lessthan";
-"posid" -> "center";
-"hascomma" -> "bibid";
-"posid" -> "firstnonauthortitletkn";
-"isdate" -> "tokenid"  [color="blue"];
-"posid" -> "followby";
-"posid" -> "lastinitial";
-"next" -> "posid";
-"posid" -> "isbibpos";
-"bibid" -> "isbibpos";
-"isbibpos" -> "bibpos";
+    "firstin" [shape="polygon", 
+               style="filled", 
+               fillcolor="red", 
+               orientation="45.0"];
+    "token" [shape="polygon", 
+             style="filled", 
+             fillcolor="red", 
+             orientation="45.0"];
+    "isdigit" [shape="ellipse", 
+               style="filled", 
+               fillcolor="red"];
+    "lessthan" [shape="polygon", 
+                style="filled", 
+                fillcolor="red", 
+                orientation="45.0"];
+    "next" [shape="polygon", 
+            orientation="45.0"];
+    "bibpos" [shape="box"];
+    "tokenid" [shape="box"];
+    "isdate" [shape="ellipse", 
+              style="filled", 
+              fillcolor="red"];
+    "firstnonauthortitletkn" [shape="polygon", 
+                              style="filled", 
+                              orientation="45.0", 
+                              fillcolor="red"];
+    "lastinitial" [shape="polygon", 
+                   style="filled", 
+                   fillcolor="red", 
+                   orientation="45.0"];
+    "posid" [shape="box"];
+    "center" [shape="polygon", 
+              style="filled", 
+              fillcolor="red", 
+              orientation="45.0"];
+    "bibid" [shape="box"];
+    "infield_ftitle" [fontcolor="white", 
+                      shape="ellipse", 
+                      style="filled", 
+                      fillcolor="blue"];
+    "bibid" -> "lastinitial";
+    "bibid" -> "haspunc";
+    "bibid" -> "firstnonauthortitletkn";
+    "followby" -> "tokenid";
+    "bibid" -> "followby";
+    "haspunc" -> "posid";
+    "firstin" -> "posid";
+    "lessthan" -> "posid";
+    "isdigit" -> "tokenid"  [color="blue"];
+    "bibid" -> "firstin";
+    "infield_ftitle" -> "bibpos"  [color="blue"];
+    "tokenid" -> "token";
+    "bibid" -> "center";
+    "token" -> "posid";
+    "hascomma" -> "posid";
+    "token" -> "bibid";
+    "posid" -> "next";
+    "isalphachar" -> "tokenid"  [color="blue"];
+    "posid" -> "lessthan";
+    "center" -> "posid";
+    "bibid" -> "hascomma";
+    "firstnonauthortitletkn" -> "posid";
+    "isdate" -> "tokenid"  [color="blue"];
+    "followby" -> "posid";
+    "lastinitial" -> "posid";
+    "next" -> "posid";
+    "isbibpos" -> "posid";
+    "isbibpos" -> "bibid";
+    "bibpos" -> "isbibpos";
 }

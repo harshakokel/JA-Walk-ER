@@ -1,5 +1,6 @@
 from DEUtils import remove_double_quote
 import itertools
+
 import random
 
 class BuildDictionaries:
@@ -61,11 +62,16 @@ class BuildDictionaries:
                 self.Graph[dest] = [src]
                 # IF Relation is destination add it in relations_dict with 1st attribute.
             if diagram.get_node(edge.get_destination())[0].get_shape() == self.RELATION_SHAPE:
-                self.relations_dict[dest] = [src]
-        for edge in diagram.get_edges():
-            if diagram.get_node(edge.get_source())[0].get_shape() == self.RELATION_SHAPE:
-                if self.relations_dict[remove_double_quote(edge.get_source())][0] != remove_double_quote(edge.get_destination()):
-                    self.relations_dict[remove_double_quote(edge.get_source())].append(remove_double_quote(edge.get_destination()))
+                if dest in self.relations_dict:
+                    self.relations_dict[dest].append(src)
+                else:
+                    self.relations_dict[dest] =  [src]
+        for edge in diagram.obj_dict['edges'].keys():
+            src= remove_double_quote(edge[0])
+            if remove_double_quote(edge[0]) in self.relations_dict:
+                dest = remove_double_quote(edge[1])
+                if dest not in self.relations_dict[src]:
+                    self.relations_dict[src].append(dest)
 
         if self.verbose:
             print('Entities:', self.entities)
