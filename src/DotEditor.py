@@ -20,7 +20,7 @@ import wx.propgrid as wxpg
 import ExtGraph as ExtGraph
 
 from UIClass import MainFrame, DialogAppend, DialogAbout, DialogGraphSetting, \
-                    DialogHelp, ERAppend
+                    DialogHelp, ERAppend, MS
 from DotScriptEditor import DS
 import ExtParser
 import AttrsDef
@@ -1079,7 +1079,7 @@ class MF(MainFrame):
         return
 
     def onViewModes( self, event ):
-        dlg = DS(self)
+        dlg = MS(self)
         dlg.SetScript(self.data_graph.EG_to_modes().decode('utf8'))
         if dlg.ShowModal() == wx.ID_OK:
             self.update_graph(dlg.graph)

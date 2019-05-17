@@ -7,7 +7,7 @@
 ## PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
 
-import wx
+import wx, os
 import wx.xrc
 import wx.propgrid as pg
 
@@ -706,7 +706,244 @@ class DialogAppend ( wx.Dialog ):
 
 	def onCancel( self, event ):
 		event.Skip()
-	
+
+
+###########################################################################
+## Class ModeScript
+###########################################################################
+
+class ModeScript(wx.Dialog):
+
+	def __init__(self, parent):
+		wx.Dialog.__init__(self, parent, id=wx.ID_ANY, title=u"Mode View", pos=wx.DefaultPosition,
+						   size=wx.Size(600, 600), style=wx.DEFAULT_DIALOG_STYLE | wx.MAXIMIZE_BOX | wx.RESIZE_BORDER)
+
+		self.SetSizeHintsSz(wx.DefaultSize, wx.DefaultSize)
+		self.SetBackgroundColour(wx.Colour(255, 255, 255))
+
+		fgSizer3 = wx.FlexGridSizer(2, 1, 0, 0)
+		fgSizer3.AddGrowableCol(0)
+		fgSizer3.AddGrowableRow(0)
+		fgSizer3.SetFlexibleDirection(wx.BOTH)
+		fgSizer3.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+		fgSizer21 = wx.FlexGridSizer(1, 2, 0, 0)
+		fgSizer21.AddGrowableCol(1)
+		fgSizer21.AddGrowableRow(0)
+		fgSizer21.SetFlexibleDirection(wx.BOTH)
+		fgSizer21.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+		self.m_panel21 = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.Size(3, -1), wx.TAB_TRAVERSAL)
+		self.m_panel21.SetBackgroundColour(wx.Colour(21, 120, 180))
+
+		fgSizer21.Add(self.m_panel21, 1, wx.EXPAND | wx.ALL, 0)
+
+		self.m_panel30 = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize,
+								  wx.SIMPLE_BORDER | wx.TAB_TRAVERSAL)
+		fgSizer29 = wx.FlexGridSizer(1, 1, 0, 0)
+		fgSizer29.AddGrowableCol(0)
+		fgSizer29.AddGrowableRow(0)
+		fgSizer29.SetFlexibleDirection(wx.BOTH)
+		fgSizer29.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+		self.m_text_script = wx.TextCtrl(self.m_panel30, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize,
+										 wx.TE_DONTWRAP | wx.TE_MULTILINE | wx.TE_PROCESS_ENTER | wx.TE_PROCESS_TAB | wx.TE_RICH | wx.NO_BORDER)
+		fgSizer29.Add(self.m_text_script, 0, wx.ALL | wx.EXPAND, 0)
+
+		self.m_panel30.SetSizer(fgSizer29)
+		self.m_panel30.Layout()
+		fgSizer29.Fit(self.m_panel30)
+		fgSizer21.Add(self.m_panel30, 1, wx.EXPAND | wx.ALL, 5)
+
+		fgSizer3.Add(fgSizer21, 1, wx.EXPAND, 5)
+
+		self.m_panel22 = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+		self.m_panel22.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_BTNFACE))
+
+		fgSizer36 = wx.FlexGridSizer(1, 4, 0, 0)
+		fgSizer36.AddGrowableCol(2)
+		fgSizer36.AddGrowableRow(0)
+		fgSizer36.SetFlexibleDirection(wx.BOTH)
+		fgSizer36.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+		# self.m_button20 = wx.Button(self.m_panel22, wx.ID_ANY, u"Shortest Walk", wx.DefaultPosition, wx.DefaultSize,
+		# 							wx.BU_EXACTFIT)
+		# self.m_button20.SetFont(wx.Font(wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString))
+		# self.m_button20.SetForegroundColour(wx.Colour(51, 160, 44))
+		#
+		# fgSizer36.Add(self.m_button20, 0, wx.ALL, 5)
+		#
+		# self.m_panel33 = wx.Panel(self.m_panel22, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.SIMPLE_BORDER)
+		# fgSizer36.Add(self.m_panel33, 1, wx.ALL | wx.EXPAND, 5)
+
+		gSizer13 = wx.GridSizer(0, 2, 0, 0)
+
+
+		self.m_button6 = wx.Button(self.m_panel22, wx.ID_CANCEL, u"&Cancel", wx.DefaultPosition, wx.DefaultSize, 0)
+		gSizer13.Add(self.m_button6, 0, wx.ALIGN_CENTER | wx.ALL, 5)
+
+		fgSizer36.Add(gSizer13, 1, wx.EXPAND, 5)
+
+		self.m_panel22.SetSizer(fgSizer36)
+		self.m_panel22.Layout()
+		fgSizer36.Fit(self.m_panel22)
+		fgSizer3.Add(self.m_panel22, 1, wx.EXPAND | wx.ALL, 0)
+
+		self.SetSizer(fgSizer3)
+		self.Layout()
+
+		self.Centre(wx.BOTH)
+
+		# Connect Events
+		self.m_text_script.Bind(wx.EVT_TEXT, self.onText)
+		self.m_text_script.Bind(wx.EVT_TEXT_ENTER, self.onTextEnter)
+		# self.m_button20.Bind(wx.EVT_BUTTON, self.onShortestWalk)
+		# self.m_button5.Bind(wx.EVT_BUTTON, self.onOK)
+
+	def __del__(self):
+		pass
+
+	# Virtual event handlers, overide them in your derived class
+	def onText(self, event):
+		event.Skip()
+
+	def onTextEnter(self, event):
+		event.Skip()
+
+	def onCheck(self, event):
+		event.Skip()
+
+	def onOK(self, event):
+		event.Skip()
+
+
+
+class MS(ModeScript):
+    '''Dialog to view modes.'''
+
+    font_dict = {'PLAIN': wx.TextAttr('#000000')}
+
+    def __init__(self, parent):
+        ModeScript.__init__(self, parent)
+
+        colors = [wx.Colour(31, 120, 180), \
+                  wx.Colour(51, 160, 44), \
+                  wx.Colour(227, 26, 28), \
+                  wx.Colour(255, 127, 0), \
+                  ]
+
+        self.font_dict.update({
+            'QUOTED_STRING': wx.TextAttr(colors[0]),
+            'COMMENT': wx.TextAttr(colors[1]),
+            'STRICT': wx.TextAttr(colors[3]),
+            'KEYWORD': wx.TextAttr(colors[3]),
+            'EDGE_LINK': wx.TextAttr(colors[3]),
+            'PAREN': wx.TextAttr(colors[2]),
+        })
+
+        ft = wx.Font(11, wx.FONTFAMILY_DEFAULT,
+                     wx.FONTSTYLE_NORMAL,
+                     wx.FONTWEIGHT_NORMAL,
+                     faceName='Monospace')
+        ### Try find best programming-font.
+        try:
+            if os.sys.platform == 'win32':
+                ft = wx.Font(11, wx.FONTFAMILY_DEFAULT,
+                             wx.FONTSTYLE_NORMAL,
+                             wx.FONTWEIGHT_NORMAL,
+                             faceName='Consolas')
+            elif os.sys.platform == 'darwin':
+                ft = wx.Font(11, wx.FONTFAMILY_DEFAULT,
+                             wx.FONTSTYLE_NORMAL,
+                             wx.FONTWEIGHT_NORMAL,
+                             faceName='Monaco')
+        except:
+            pass
+
+        self.m_text_script.SetDefaultStyle(wx.TextAttr(font=ft))
+        self.m_text_script.SetFont(ft)
+
+        self.m_text_script.Bind(wx.EVT_KEY_DOWN, self.onTab)
+
+    def onTab(self, event):
+        keycode = event.GetKeyCode()
+        if keycode == wx.WXK_TAB:
+            self.m_text_script.WriteText(' ' * 4)
+            # event.EventObject.Navigate()
+        else:
+            event.Skip()
+
+
+    def SetScript(self, text):
+        self.m_text_script.SetValue(text)
+
+    def onText(self, event):
+
+        pos = self.m_text_script.GetInsertionPoint()
+        x, _ = self.m_text_script.PositionToXY(pos)
+
+        return
+
+    def onCheck(self, event):
+        '''Do check on script, format script if correct.'''
+        script = self.m_text_script.GetValue().strip()
+        ### Get strict status here.
+        strict_status = False
+        if script[:6].lower() == 'strict':
+            strict_status = True
+
+        try:
+            g = ExtParser.parse_string(script.encode('utf8'))
+            ### Hack the strcit status cause bug of pydot.
+            g.set_strict(strict_status)
+            g = ExtGraph.ExtGraph(obj_dict=g.obj_dict)
+
+        except ExtParser.ParseException, err:
+
+            pos = self.m_text_script.XYToPosition(0, err.lineno - 1)
+            w = self.m_text_script.GetLineLength(err.lineno - 1)
+
+            self.m_text_script.SetFocus()
+            self.m_text_script.SetSelection(pos, pos + w)
+
+            wx.MessageBox("Parse Script Error.\n" + 20 * "-" + "\n%s" % err, 'Parse script error')
+
+            return
+
+        self.SetScript(g.EG_to_string().decode('utf8'))
+
+        return
+
+    def onOK(self, event):
+        '''
+        If script is ok, store script in graph objcet and return to main window.
+        Else highlight the error line in editor.
+        '''
+        script = self.m_text_script.GetValue().strip()
+        ### Get strict status here.
+        strict_status = False
+        if script[:6].lower() == 'strict':
+            strict_status = True
+
+        try:
+            g = ExtParser.parse_string(script.encode('utf8'))
+            ### Hack the strcit status cause bug of pydot.
+            g.set_strict(strict_status)
+
+            self.graph = ExtGraph.ExtGraph(obj_dict=g.obj_dict)
+            self.EndModal(wx.ID_OK)
+
+        except ExtParser.ParseException, err:
+
+            pos = self.m_text_script.XYToPosition(0, err.lineno - 1)
+            w = self.m_text_script.GetLineLength(err.lineno - 1)
+
+            self.m_text_script.SetFocus()
+            self.m_text_script.SetSelection(pos, pos + w)
+
+            wx.MessageBox("Parse Script Error.\n" + 20 * "-" + "\n%s" % err, 'Parse script error')
+
+        return
 
 ###########################################################################
 ## Class DialogScript

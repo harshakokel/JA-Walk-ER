@@ -46,10 +46,10 @@ class ExtGraph(pydot.Dot):
     __history_point = -1
 
     #order [u"Attribute Node",u"Entity Node", u"Relation Node"]
-    node_shape = [walker.BuildDictionaries.ENTITY_SHAPE,walker.BuildDictionaries.RELATION_SHAPE,walker.BuildDictionaries.ATTRIBUTE_SHAPE,walker.BuildDictionaries.ATTRIBUTE_SHAPE]
+    node_shape = [walker.BuildDictionariesFromDOT.ENTITY_SHAPE, walker.BuildDictionariesFromDOT.RELATION_SHAPE, walker.BuildDictionariesFromDOT.ATTRIBUTE_SHAPE, walker.BuildDictionariesFromDOT.ATTRIBUTE_SHAPE]
 
     # Order [ u"None", u"Important", u"Target"]
-    node_color = [None,  walker.BuildDictionaries.IMPORTANT_COLOR, walker.BuildDictionaries.TARGET_COLOR ]
+    node_color = [None, walker.BuildDictionariesFromDOT.IMPORTANT_COLOR, walker.BuildDictionariesFromDOT.TARGET_COLOR]
     
     def __init__(self, graph_name='G', obj_dict=None, template_file=None):
         pydot.Dot.__init__(self, graph_name=graph_name, obj_dict=obj_dict)
@@ -188,7 +188,7 @@ class ExtGraph(pydot.Dot):
             attributes["style"] = '\"filled\"'
             attributes["fillcolor"] = self.node_color[color]
             if color == 2:
-                attributes["fontcolor"]= walker.BuildDictionaries.WHITE
+                attributes["fontcolor"]= walker.BuildDictionariesFromDOT.WHITE
         if type == 1:
             attributes["orientation"] = u"45.0"
         elif type == 3:
@@ -242,10 +242,10 @@ class ExtGraph(pydot.Dot):
         nameA = add_double_quote(nameA)
         nameB = add_double_quote(nameB)
 
-        if root_graph.get_node(nameA)[0].get_shape() == walker.BuildDictionaries.ENTITY_SHAPE and root_graph.get_node(nameB)[0].get_shape() == walker.BuildDictionaries.ATTRIBUTE_SHAPE:
-            e = pydot.Edge(src=nameB, dst=nameA, color=walker.BuildDictionaries.ATTRIBUTE_EDGE)
-        elif root_graph.get_node(nameB)[0].get_shape() == walker.BuildDictionaries.ENTITY_SHAPE and root_graph.get_node(nameA)[0].get_shape() == walker.BuildDictionaries.ATTRIBUTE_SHAPE:
-            e = pydot.Edge(src=nameA, dst=nameB, color=walker.BuildDictionaries.ATTRIBUTE_EDGE)
+        if root_graph.get_node(nameA)[0].get_shape() == walker.BuildDictionariesFromDOT.ENTITY_SHAPE and root_graph.get_node(nameB)[0].get_shape() == walker.BuildDictionariesFromDOT.ATTRIBUTE_SHAPE:
+            e = pydot.Edge(src=nameB, dst=nameA, color=walker.BuildDictionariesFromDOT.ATTRIBUTE_EDGE)
+        elif root_graph.get_node(nameB)[0].get_shape() == walker.BuildDictionariesFromDOT.ENTITY_SHAPE and root_graph.get_node(nameA)[0].get_shape() == walker.BuildDictionariesFromDOT.ATTRIBUTE_SHAPE:
+            e = pydot.Edge(src=nameA, dst=nameB, color=walker.BuildDictionariesFromDOT.ATTRIBUTE_EDGE)
         else:
             e = pydot.Edge(src=nameA, dst=nameB)
         
@@ -387,7 +387,7 @@ class ExtGraph(pydot.Dot):
         This version try to make string looking better than to_string().
         """
         #TODO Add modes
-        dictionary = walker.BuildDictionaries(self)
+        dictionary = walker.BuildDictionariesFromDOT(self)
         if  dictionary.target is  None:
             return "No target node found"
         target = dictionary.target
