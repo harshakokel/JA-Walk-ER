@@ -90,6 +90,6 @@ digraph G {
     "lastinitial" -> "posid";
     "next" -> "posid";
     "isbibpos" -> "posid";
-    "isbibpos" -> "bibid";
+    "bibid" -> "isbibpos";
     "bibpos" -> "isbibpos";
 }

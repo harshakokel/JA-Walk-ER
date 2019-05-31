@@ -1,6 +1,7 @@
 from DEUtils import remove_double_quote
 import itertools
 import argparse
+import ExtParser
 import os
 import itertools
 import random
@@ -18,15 +19,16 @@ class Setup:
 
     def __init__(self):
 
-        self.diagram_file = None # The diagram we're walking.
+        self.diagram = None # The diagram we're walking.
         self.verbose = False     # -v, --verbose
         self.nowalk = False      # -n, --nowalk
         self.walk = True         # -w, --walk
         self.shortest = False    # -s, --shortest
-        self.exhaustive = False  # -p, --exhaustive
+        self.exhaustive = False  # -e, --exhaustive
         self.random = False      # -r, --random
         self.randomwalk = False  # -rw, --randomwalk
         self.Nfeatures = None    # -n, --number
+        self.dot = False  # -d, --dot
 
         # Start by creating an argument parser to help with user input.
         parser = argparse.ArgumentParser(description="Walk-ER: a system for walking the paths in an entity-relational diagram."\
@@ -64,7 +66,9 @@ class Setup:
         walk.add_argument("-rw", "--randomwalk",
                           help="Walk a random path from the target until reaching a depth limit (specified with --number).",
                           action="store_true")
-
+        parser.add_argument("-d", "--dot",
+                          help="Graph provided in dot format.",
+                          action="store_true")
         # Get the args.
         args = parser.parse_args()
 
@@ -72,17 +76,21 @@ class Setup:
         if not os.path.isfile(args.diagram_file):
             raise ExceptionCase('Error [1]: Could not find file: "' + args.diagram_file + '"')
 
-        # Import the file:
-        '''Reads the contents of 'file_to_read', raises an exception if it cannot be read.'''
-        try:
-            diagram = open(args.diagram_file).read()
-        except:
-            raise ExceptionCase('Error [1]: Could not read the file: "' + args.diagram_file + '"')
 
-        if (len(diagram.splitlines()) == 6):
-            self.diagram_file = diagram
+        # Import the diagram:
+        self.dot = args.dot
+        if self.dot:
+            self.diagram = ExtParser.parse_file(args.diagram_file)
         else:
-            raise ExceptionCase('Error [1]: File opened successfully, but has the wrong number of lines.')
+            '''Reads the contents of 'file_to_read', raises an exception if it cannot be read.'''
+            try:
+                diagram = open(args.diagram_file).read()
+            except:
+                raise ExceptionCase('Error [1]: Could not read the file: "' + args.diagram_file + '"')
+            if len(diagram.splitlines()) == 6:
+                self.diagram = diagram
+            else:
+                raise ExceptionCase('Error [1]: File opened successfully, but has the wrong number of lines.')
 
         # Since the files exist, we can go ahead and set the rest of the parameters, starting with verbose
         self.verbose = args.verbose
@@ -150,7 +158,7 @@ class BuildDictionaries:
                     elif current[1] == 'RelationNodeStyle':
                         self.relations.append(current[0])
                     else:
-                        print(curren)
+
                         raise ExceptionCase(
                             'Error [2]: During BuildDictionaries/parse, found something that was not an entity, relation, or attribute.')
 
@@ -621,10 +629,14 @@ if __name__ == '__main__':
 
     '''Parse the commandline input, import the file. Contents are stored in setup.diagram_file.'''
     setup = Setup()
-    diagram = setup.diagram_file
+    diagram = setup.diagram
 
     '''Turn turn the file into dictionaries and lists.'''
-    dictionaries = BuildDictionaries(diagram, verbose=setup.verbose)
+    if setup.dot:
+
+        dictionaries = BuildDictionariesFromDOT(diagram , verbose=setup.verbose)
+    else:
+        dictionaries = BuildDictionaries(diagram, verbose=setup.verbose)
 
     if (setup.walk or setup.shortest):
         target = dictionaries.target
@@ -636,7 +648,6 @@ if __name__ == '__main__':
             features = dictionaries.importants
         else:
             features = dictionaries.importants[:setup.Nfeatures]
-        print(features)
 
         networks = Networks(target, features, dictionaries, verbose=setup.verbose)
 

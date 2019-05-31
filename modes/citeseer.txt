@@ -6,7 +6,7 @@ mode: hascomma(+bibid,+posid).
 mode: haspunc(+bibid,+posid).
 mode: infield_ftitle(+bibpos).
 mode: isalphachar(+tokenid).
-mode: isbibpos(+bibpos,-posid,-bibid).
+mode: isbibpos(+bibpos,-bibid,-posid).
 mode: isdate(+tokenid).
 mode: isdigit(+tokenid).
 mode: lastinitial(+bibid,+posid).
