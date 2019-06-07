@@ -1,3 +1,7 @@
+=======
+Walk-ER
+=======
+
 .. image:: https://raw.githubusercontent.com/starling-lab/Walk-ER/master/media/WalkERLogo.png
    :align: center
    :alt: Walk-ER Logo, Automatic Construction of Background Knowledge
@@ -28,18 +32,21 @@ If you find these ideas interesting or want to build on this line of work, pleas
      year   = {2017}
    }
 
+
 Getting Started
 ---------------
 
-**💾 From Source**
 
-Clone a copy of the repository and build a copy.
+Clone a copy of the repository from here_ and refer the :doc:`/user_guide/index`..
 
-**🖥 Download a binary**
 
-Download a pre-built binary and get started right away.
+
 
 .. toctree::
-   :hidden:
-   :maxdepth: 1
-   :caption: Contents:
+  :hidden:
+  :maxdepth: 3
+
+  user_guide/index
+
+.. _here: https://github.com/harshakokel/Walk-ER
+

@@ -265,11 +265,12 @@ class BuildDictionariesFromDOT(BuildDictionaries):
     RELATION_SHAPE = '\"polygon\"'
     ATTRIBUTE_SHAPE = '\"ellipse\"'
     IMPORTANT_COLOR = '\"red\"'
-    TARGET_COLOR = '\"blue\"'
+    TARGET_COLOR = '\"cyan\"'
+    TARGET_COLOR_BK = '\"blue\"'
     EG_NODE_IGNORE  = 'node'
     EG_EDGE_IGNORE = 'edge'
     ATTRIBUTE_EDGE = '\"blue\"'
-    WHITE = '\"white\"'
+    TARGET_FONT_COLOR = '\"black\"'
 
     def __init__(self, diagram, verbose=False):
         self.verbose = verbose
@@ -301,6 +302,8 @@ class BuildDictionariesFromDOT(BuildDictionaries):
             if n.get_fillcolor() == self.IMPORTANT_COLOR:
                 self.importants.append(remove_double_quote(n.get_name()))
             elif n.get_fillcolor() == self.TARGET_COLOR:
+                self.target = remove_double_quote(n.get_name())
+            elif n.get_fillcolor() == self.TARGET_COLOR_BK:
                 self.target = remove_double_quote(n.get_name())
         for edge in diagram.get_edges():
             src = remove_double_quote(edge.get_source())

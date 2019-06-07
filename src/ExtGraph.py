@@ -188,7 +188,7 @@ class ExtGraph(pydot.Dot):
             attributes["style"] = '\"filled\"'
             attributes["fillcolor"] = self.node_color[color]
             if color == 2:
-                attributes["fontcolor"]= walker.BuildDictionariesFromDOT.WHITE
+                attributes["fontcolor"]= walker.BuildDictionariesFromDOT.TARGET_FONT_COLOR
         if type == 1:
             attributes["orientation"] = u"45.0"
         elif type == 3:

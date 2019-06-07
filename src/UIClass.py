@@ -297,12 +297,12 @@ class MainFrame ( wx.Frame ):
 		
 		fgSizer151.Add( self.m_panel171, 1, wx.EXPAND |wx.ALL, 0 )
 		
-		self.m_staticText1_hint = wx.StaticText( self.m_panel18, wx.ID_ANY, u"Hint", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText1_hint.Wrap( 50 )
-		self.m_staticText1_hint.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 72, 90, 90, False, wx.EmptyString ) )
-		self.m_staticText1_hint.SetForegroundColour( wx.Colour( 21, 120, 180 ) )
+		# self.m_staticText1_hint = wx.StaticText( self.m_panel18, wx.ID_ANY, u"Hint", wx.DefaultPosition, wx.DefaultSize, 0 )
+		# self.m_staticText1_hint.Wrap( 50 )
+		# self.m_staticText1_hint.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 72, 90, 90, False, wx.EmptyString ) )
+		# self.m_staticText1_hint.SetForegroundColour( wx.Colour( 21, 120, 180 ) )
 		
-		fgSizer151.Add( self.m_staticText1_hint, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_LEFT|wx.ALL|wx.EXPAND, 5 )
+		# fgSizer151.Add( self.m_staticText1_hint, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_LEFT|wx.ALL|wx.EXPAND, 5 )
 		
 		
 		self.m_panel18.SetSizer( fgSizer151 )

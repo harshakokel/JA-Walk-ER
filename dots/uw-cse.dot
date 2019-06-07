@@ -17,12 +17,11 @@ digraph G {
                      shape="polygon", 
                      style="filled", 
                      fillcolor="red"];
-    "advisedby" [style="filled", 
-                 orientation="45.0", 
-                 color="white", 
-                 fontcolor="white", 
+    "advisedby" [orientation="45.0", 
                  shape="polygon", 
-                 fillcolor="blue"];
+                 peripheries="1", 
+                 style="filled", 
+                 fillcolor="cyan"];
     "taughtby" [orientation="45.0", 
                 shape="polygon", 
                 style="filled", 

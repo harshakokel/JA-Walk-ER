@@ -40,9 +40,8 @@ digraph G {
     "courseta" -> "Person";
     "Course" -> "courseprof";
     "courseprof" -> "Person";
-    "faculty" [fontcolor="white", 
-               shape="ellipse", 
+    "faculty" [shape="ellipse", 
                style="filled", 
-               fillcolor="blue"];
+               fillcolor="cyan"];
     "faculty" -> "Person"  [color="blue"];
 }
