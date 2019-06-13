@@ -457,7 +457,7 @@ class MF(MainFrame):
         self.m_panel_paint.Refresh()
         
         ### Set window title.
-        title = 'Walk-ER GUI'
+        title = 'JA-Walk-ER GUI'
         if self.file_path is None:
             if self.is_data_changed: title += ' - *'
         else:

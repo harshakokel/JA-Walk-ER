@@ -9,7 +9,7 @@ Walk-ER can either be invoked from a terminal or invoked from a graphical user i
 GUI version
 -----------
 
-Walk-ER GUI allows user to create a simple ER diagram consisting of entities, attributes, and relations (square, ellipse and diamond shape respectively) and provides mode representation. Walk-ER GUI is built on top of Doteditor_.
+JA-Walk-ER GUI allows user to create a simple ER diagram consisting of entities, attributes, and relations (square, ellipse and diamond shape respectively) and provides mode representation. Walk-ER GUI is built on top of Doteditor_.
 
     The dependency list includes:
 
@@ -20,9 +20,9 @@ Walk-ER GUI allows user to create a simple ER diagram consisting of entities, at
 
     Refer to the Doteditor github_ page for issues in dependencies.
 
-Run the Walk-ER GUI, using following command:
+Run the JA-Walk-ER GUI, using following command:
 
->>> python /src/walkergui.py
+>>> python /src/jawalkergui.py
 
 This should pop up the Walk-ER GUI. You can now create the ER model for your data set. The GIF below displays how to add nodes & edges to create a simple ER diagram and view the modes. Target variables are to be highlighted in blue and important variables are highlighted in red. **It is necessary to have a target variable to view the modes.**
 
@@ -30,7 +30,7 @@ This should pop up the Walk-ER GUI. You can now create the ER model for your dat
 .. image:: ../images/webkb.gif
 
 
-Some additional capabilities of Walk-ER GUI are:
+Some additional capabilities of JA-Walk-ER GUI are:
 
 1. Allows to save the ER diagram as ``.dot`` file
 #. Lets you export modes to a text file
@@ -43,11 +43,11 @@ Walker-GUI currently only supports exhaustive walk to find the modes. For other 
 Interactive version
 -------------------
 
-Interactive version of Walker support input of ER-diagram in two formats: ``.dot`` and a custom ``.mayukh`` files.
+Interactive version of JA-Walk-ER support input of ER-diagram in two formats: ``.dot`` and a custom ``.mayukh`` files.
 
 
->>> python walker.py -h
-usage: walker.py [-h] [-v] [--number NUMBER] [-w | -s | -n | -e | -r | -rw]
+>>> python jawalker.py -h
+usage: jawalker.py [-h] [-v] [--number NUMBER] [-w | -s | -n | -e | -r | -rw]
                  [-d]
                  diagram_file
 Walk-ER: a system for walking the paths in an entity-relational diagram.
@@ -82,13 +82,13 @@ permitted by law.
 
 Examples:
 
-* >>> python src/walker.py -w diagrams/imdb.mayukh
+* >>> python src/jawalker.py -w diagrams/imdb.mayukh
 
-* >>> python src/walker.py -w -d dots/imdb.dot
+* >>> python src/jawalker.py -w -d dots/imdb.dot
 
-* >>> python src/walker.py -rw --number 10 diagrams/imdb.mayukh
+* >>> python src/jawalker.py -rw --number 10 diagrams/imdb.mayukh
 
-* >>> python src/walker.py -s -d dots/imdb.dot
+* >>> python src/jawalker.py -s -d dots/imdb.dot
 
 
 

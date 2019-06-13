@@ -1,6 +1,6 @@
 # Documentation Documentation
 
-Documentation for Walk-ER is built using `sphinx`:
+Documentation for Just-another Walk-ER is built using `sphinx`:
 
 ## Building a Local Copy
 

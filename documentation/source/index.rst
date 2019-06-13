@@ -1,10 +1,12 @@
-=======
-Walk-ER
-=======
+==========
+JA-Walk-ER
+==========
 
 .. image:: https://raw.githubusercontent.com/starling-lab/Walk-ER/master/media/WalkERLogo.png
    :align: center
    :alt: Walk-ER Logo, Automatic Construction of Background Knowledge
+
+
 
 Convert entity-relationship diagrams to "modes" in order to constrain the search space in relational learning systems.
 
@@ -17,6 +19,8 @@ Inductive Logic Programming.
 "Walk-ER" performs this same function using entity-relationship diagrams (ERDs).  ERDs are usually employed in the
 design of relational databases, and should be familiar to many people who have worked with structured query language
 (SQL) or relational database management systems (RDBMs).
+
+This is just another implementation of WALK-ER, because the original code had dependencies which need license. Original source code & tex file for the WALK-ER can be found [here](https://github.com/starling-lab/Walk-ER).
 
 Citing
 ------
@@ -48,5 +52,5 @@ Clone a copy of the repository from here_ and refer the :doc:`/user_guide/index`
 
   user_guide/index
 
-.. _here: https://github.com/harshakokel/Walk-ER
+.. _here: https://github.com/harshakokel/JA-Walk-ER
 
