@@ -9,7 +9,7 @@
 
 This is just another implementation of WALK-ER, because the original code had dependencies which need license. Original source code & tex file for the WALK-ER can be found [here](https://github.com/starling-lab/Walk-ER). 
 
-Documentation of this JA-Walk-ER are hosted with Read the Docs [here]() 
+Documentation of this JA-Walk-ER are hosted with Read the Docs [here](https://ja-walk-er.readthedocs.io/) 
 
 
 
